@@ -1,0 +1,123 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>Document</title>
+  <style>
+    html,body,ul {
+      margin: 0;
+      padding: 0;
+    }
+
+    ul {
+      list-style: none;
+    }
+    .swipe {
+      overflow: hidden;
+      visibility: hidden;
+      position: relative;
+    }
+
+    .swipe-wrap {
+      overflow: hidden;
+      position: relative;
+    }
+
+    .swipe-wrap>li {
+      float: left;
+      width: 100%;
+      position: relative;
+    }
+
+    a {
+      display: block;
+      width: 100%;
+    }
+
+    img {
+      width: 100%;
+      vertical-align: middle;
+    }
+
+
+  </style>
+</head>
+
+<body>
+  <div id='slider' class='swipe'>
+    <ul class='swipe-wrap'>
+        <li>
+            <a href="javascript:;">
+              <img src="./image/0.png" alt="">
+            </a>
+          </li>
+          <li>
+            <a href="javascript:;">
+              <img src="./image/1.png" alt="">
+            </a>
+          </li>
+          <li>
+            <a href="javascript:;">
+              <img src="./image/2.png" alt="">
+            </a>
+          </li>
+          <li>
+            <a href="javascript:;">
+              <img src="./image/3.png" alt="">
+            </a>
+          </li>
+          <li>
+            <a href="javascript:;">
+              <img src="./image/4.png" alt="">
+            </a>
+          </li>
+          <li>
+            <a href="javascript:;">
+              <img src="./image/5.png" alt="">
+            </a>
+          </li>
+          <li>
+            <a href="javascript:;">
+              <img src="./image/6.png" alt="">
+            </a>
+          </li>
+          <li>
+            <a href="javascript:;">
+              <img src="./image/7.png" alt="">
+            </a>
+          </li>
+    </ul>
+  </div>
+  <script src="./js/swipe.js"></script>
+  <script>
+    window.mySwipe = new Swipe(document.getElementById('slider'), {
+      // startSlide设置的是最开始显示哪个li
+      // startSlide: 2,
+      // 轮播的过渡速度
+      speed: 400,
+      // 定时器的等待时间
+      auto: 3000,
+      // 是否能循环播放
+      continuous: true,
+      // 停止触摸
+      // disableScroll: false,
+      // 组织冒泡
+      stopPropagation: false,
+      // 回调
+      callback: function (index, elem) { },
+      // 过渡事件完成后的回调
+      transitionEnd: function (index, elem) { }
+
+      // 在这个轮播图插件中 当用户介入了轮播图的轮播 那么轮播图会停止轮播
+      // 解决方案: 看README.md
+
+      // swipe 比较轻量  无依赖 功能少
+      // swiper 比较重  无依赖  功能比较多 可以配合jQuery使用
+    });
+  </script>
+</body>
+
+</html>

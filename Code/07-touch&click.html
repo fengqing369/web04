@@ -1,0 +1,80 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+	<meta charset="UTF-8">
+	<meta http-equiv="X-UA-Compatible" content="ie=edge">
+	<!-- 写上viewport 就可以解决click延迟 -->
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<title>touch和click的触发顺序</title>
+	<style>
+		html,
+		body {
+			width: 100%;
+			height: 100%;
+			margin: 0;
+			padding: 0;
+		}
+
+		.box {
+			width: 300px;
+			height: 300px;
+			background-color: purple;
+		}
+	</style>
+</head>
+
+<body>
+	<div class="box"></div>
+	<script>
+		// 比较touch事件和click事件的事件
+		// click事件比touch事件晚200-300ms左右
+
+		// 步骤:
+
+	 var box = document.querySelector(".box");
+    var startX, startY, endX, endY, startTime, endTime;
+    // 2.给box添加touchstart事件 为了获取触点的起点位置
+    box.addEventListener('touchstart', function (e) {
+      var touches = e.targetTouches[0];
+      startX = touches.clientX;
+      startY = touches.clientY;
+      startTime = new Date().getTime();
+      console.log(startTime);
+    })
+    // 3.给box添加touchend事件  为了获取触点的结束位置
+    box.addEventListener('touchend', function (e) {
+      var touches = e.changedTouches[0];
+      endX = touches.clientX;
+      endY = touches.clientY;
+      endTime = new Date().getTime();
+      //  console.log(startTime);
+      // console.log(endTime - startTime);
+      // 让一些专门来搞坏的人 把这种bug给消除掉
+      if (endTime - startTime > 200) {
+        return;
+      }
+      // 判断X坐标和Y坐标的差的绝对值是否为0，如果为0 意味着X和Y坐标没有发生变化 所以叫tap 
+      if (Math.abs(endX - startX) < 6 && Math.abs(endY - startY) < 6) {
+        console.log('tap手势触发了');
+				console.time('timer');
+      }
+    })
+		// click事件
+
+	
+		box.addEventListener('click', function () {
+				// 在click事件中声明一个计时器 结束
+				console.timeEnd("timer");
+				console.log("click事件触发了");
+		})
+
+
+
+		// 怎么解决click延时问题: 
+
+		// 只要写上viewport就可以了
+	</script>
+</body>
+
+</html>

@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<meta http-equiv="X-UA-Compatible" content="ie=edge">
+	<title>Document</title>
+	<style>
+		.box {
+			width: 100px;
+			height: 100px;
+			background-color: tomato;
+			margin: 0 auto;
+		}
+	</style>
+</head>
+<body>
+	<div class="box"></div>
+
+	<script>
+		var box = document.querySelector(".box");
+		// 给box添加一个touchstart事件
+		box.addEventListener("touchstart",function(e){
+
+			console.log(e);
+			// console.log("触摸开始");
+
+			this.innerHTML = "tar:"+e.targetTouches.length + 'to:'+e.touches.length + "ch:"+e.changedTouches.length+'--触摸开始';
+		})
+
+
+		// 给box添加一个touchmove事件
+		box.addEventListener('touchmove',function(e){
+			this.innerHTML = "tar:"+e.targetTouches.length + 'to:'+e.touches.length + "ch:"+e.changedTouches.length+"--触摸移动";
+		})
+
+
+		// 给box添加一个touchend事件
+		box.addEventListener('touchend',function(e){
+			this.innerHTML = "tar:"+e.targetTouches.length + 'to:'+e.touches.length + "ch:"+e.changedTouches.length+"--触摸结束";
+
+			console.log(e);
+		})
+
+		// 三个触摸事件对象
+			// changedTouches数组: 改变了状态的触摸点的集合（在touchend事件触发之后,targetTouches和touches中没有触摸点的数据,只有changedTouches有数据）
+			// targetTouches数组 length 代表了绑定触摸事件的元素上有几个触摸点(手指)
+			// touches数组 length代表了手机屏幕上有几个触点(手指)
+	</script>
+</body>
+</html>

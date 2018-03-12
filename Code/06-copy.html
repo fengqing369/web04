@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>Document</title>
+</head>
+
+<body>
+  <script>
+    // 功能: 判断手势的方向
+
+    // 思路:   判断垂直还是水平  判断的是 水平方向的滑动距离和垂直方向的滑动距离的大小
+    // 判断左右 判断的是  水平方向  起始点X  和终止点X的大小
+    // 判断上下  判断的是  垂直方向  起始点Y  和终止点Y 的大小
+
+
+    // 步骤:
+
+    // 1.声明变量
+    var startX, startY, endX, endY, absX, absY;
+    // 2.给document添加touchstart事件
+    document.addEventListener("touchstart", function (e) {
+      var touches = e.targetTouches[0];
+      startX = touches.clientX;
+      startY = touches.clientY;
+    })
+    // 3.给document添加touchend事件
+    document.addEventListener("touchend", function (e) {
+      var touches = e.changedTouches[0];
+      endX = touches.clientX;
+      endY = touches.clientY;
+      // 写代码的时候  写一个功能 要测试一次 步步为营 
+      // 4. 求水平距离和垂直距离
+      absX = Math.abs(endX - startX);
+      absY = Math.abs(endY - startY);
+      // 5. 判断水平还是垂直
+      //       if (absX > absY) {
+      //         // 6.如果是水平 判断左右
+      //         if(endX - startX > 0) {
+      //           console.log("水平向右");
+      //         }else {
+      //           console.log("水平向左");
+      //         }
+      //       } else {
+      //         // 7.如果是垂直 判断上下
+      //         if(endY - startY > 0) {
+      //           console.log("垂直向下");
+      //         }else {
+      //           console.log("垂直向上");
+      //         }
+      //       } 
+
+      // 精简代码
+      // var direction = absX > absY ?
+      //   endX - startX > 0 ? '向右' : '向左'
+      //   : endY - startY > 0 ? '向下' : '向上';
+
+      // console.log(direction);
+
+    })
+
+  </script>
+</body>
+
+</html>

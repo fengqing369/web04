@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>Document</title>
+  <style>
+    .box {
+      width: 200px;
+      height: 200px;
+      background-color: tomato;
+      margin: 0 auto;
+    }
+  </style>
+</head>
+
+<body>
+  <div class="box"></div>
+
+  <script>
+    // 功能: 模拟tap手势
+
+    // 技术: touchstart  touchend
+
+    // 思路: 咋样才算点击 : 只要在touchstart的时候 获取的点的位置和touchend的时候点的位置一样我们就算点击
+
+    // 步骤:
+    // 1.获取box
+
+    var box = document.querySelector(".box");
+    var startX, startY, endX, endY, startTime, endTime;
+    // 2.给box添加touchstart事件 为了获取触点的起点位置
+    box.addEventListener('touchstart', function (e) {
+      var touches = e.targetTouches[0];
+      startX = touches.clientX;
+      startY = touches.clientY;
+      startTime = new Date().getTime();
+      console.log(startTime);
+    })
+    // 3.给box添加touchend事件  为了获取触点的结束位置
+    box.addEventListener('touchend', function (e) {
+      var touches = e.changedTouches[0];
+      endX = touches.clientX;
+      endY = touches.clientY;
+      endTime = new Date().getTime();
+      //  console.log(startTime);
+      // console.log(endTime - startTime);
+      // 让一些专门来搞坏的人 把这种bug给消除掉
+      if (endTime - startTime > 200) {
+        return;
+      }
+      // 判断X坐标和Y坐标的差的绝对值是否为0，如果为0 意味着X和Y坐标没有发生变化 所以叫tap 
+      if (Math.abs(endX - startX) < 6 && Math.abs(endY - startY) < 6) {
+        alert('tap手势触发了');
+      }
+    })
+  </script>
+</body>
+
+</html>

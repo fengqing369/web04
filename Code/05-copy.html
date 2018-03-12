@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>Document</title>
+  <style>
+    .box {
+      position: absolute;
+      top: 5px;
+      left: 5px;
+      width: 100px;
+      height: 100px;
+      background-color: tomato;
+    }
+  </style>
+</head>
+
+<body>
+  <div class="box"></div>
+
+  <script>
+
+    // 功能：移动端拖拽
+
+    // 思路： box在页面中已经有一个原始位置(top: 5 left: 5)  我们可以获取到手指的移动的距离  然后把距离的X 和Y 的变化的值分别和top 和left相加  
+
+
+    // 步骤： 
+    // 1.获取元素
+    var box = document.querySelector(".box");
+    // 2.声明变量
+    var startX, startY, currentX, currentY, _left, _top;
+    // 3.给box添加touchstart事件 为了获取起始点位置X,Y  元素原始的left 和top
+    box.addEventListener('touchstart', function (e) {
+      var touches = e.targetTouches[0];
+
+      startX = touches.clientX;
+      startY = touches.clientY;
+
+      // 获取元素的原始top 和left
+      _left = this.offsetLeft;
+      _top = this.offsetTop;
+
+      console.log(_left, _top);
+    })
+    // 4.给box添加touchmove事件
+
+    // 注意点: 之所以不用touchend 原因是 拖拽的时候 div会闪现
+    box.addEventListener('touchmove', function (e) {
+      var touches = e.changedTouches[0];
+
+      currentX = touches.clientX;
+      currentY = touches.clientY;
+
+      // 5.给box设置位置样式  当前的box的样式 = 原始的原始  + 改变的触点的位置差
+
+      this.style.top = _top + (currentY - startY) + 'px';
+      this.style.left = _left + (currentX - startX) + 'px';
+
+    })
+
+  </script>
+</body>
+
+</html>
